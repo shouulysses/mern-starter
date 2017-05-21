@@ -3,7 +3,7 @@ import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
-import IntlWrapper from '../client/modules/Intl/IntlWrapper';
+import IntlWrapper from '../client/IntlWrapper';
 
 // Webpack Requirements
 import webpack from 'webpack';
@@ -32,9 +32,12 @@ import Helmet from 'react-helmet';
 // Import required modules
 import routes from '../client/routes';
 import { fetchComponentData } from './util/fetchData';
+import { fetchIsAuthenticated } from './util/fetchAuth';
 import posts from './routes/post.routes';
+import auth from './routes/auth.routes';
 import dummyData from './dummyData';
 import serverConfig from './config';
+import passport from './passport';
 
 // Set native promises as mongoose promise
 mongoose.Promise = global.Promise;
@@ -55,7 +58,9 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
+app.use(passport.initialize());
 app.use('/api', posts);
+app.use('/auth', auth);
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
@@ -119,7 +124,8 @@ app.use((req, res, next) => {
 
     const store = configureStore();
 
-    return fetchComponentData(store, renderProps.components, renderProps.params)
+    return fetchIsAuthenticated(store.dispatch, req, passport)
+      .then(() => fetchComponentData(store, renderProps.components, renderProps.params))
       .then(() => {
         const initialView = renderToString(
           <Provider store={store}>
