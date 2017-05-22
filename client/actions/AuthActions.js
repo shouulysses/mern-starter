@@ -1,7 +1,17 @@
 import fetch from 'isomorphic-fetch';
 import * as ActionTypes from '../constants/constants';
+import callApi from '../util/apiCaller';
 
 const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || (`http://localhost:${(process.env.PORT || 8000)}`) : '';
+
+export function initialState(){
+  return {
+    isAuthenticated: false,
+    isFetching: false,
+    loaded: false,
+    message: ''
+  };
+}
 
 export function requestLogin(creds) {
   return {
@@ -95,24 +105,43 @@ export function checkToken(sToken) {
 export function loginUser(creds) {
   return (dispatch) => {
     dispatch(requestLogin(creds));
-    return fetch(`${baseURL}/auth/login`, {
-      method: 'POST',
-      credentials: 'same-origin',
-      body: JSON.stringify(creds),
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    })
-    .then(response => response.json())
+    return callApi('login', 'POST', creds) 
     .then((response) => {
       const { user, message } = response;
       if (!user.ok) {
         dispatch(loginFailure(message));
         return Promise.reject(message);
       }
-
       localStorage.setItem('token', user.token);
       dispatch(loginSuccess(user));
+      
+      return null;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
+}
+
+export function signup(creds) {
+  return (dispatch) => {
+    dispatch(requestLogin(creds));
+    return callApi('signup', 'POST', {
+      user: {
+        email: creds.email,
+        password: creds.password,
+        confirmPassword: creds.confirmPassword
+      }
+    }) 
+    .then((response) => {
+      const { user, message } = response;
+      if (!user.ok) {
+        dispatch(loginFailure(message));
+        return Promise.reject(message);
+      }
+      localStorage.setItem('token', user.token);
+      dispatch(loginSuccess(user));
+      console.log('!!!',user);
       return null;
     })
     .catch((err) => {

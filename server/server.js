@@ -3,6 +3,7 @@ import compression from 'compression';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
+import session from 'express-session';
 import IntlWrapper from '../client/IntlWrapper';
 
 // Webpack Requirements
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
 }
+
 
 // React And Redux Setup
 import { configureStore } from '../client/store';
@@ -60,7 +62,15 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist')));
 app.use(passport.initialize());
 app.use('/api', posts);
-app.use('/auth', auth);
+app.use('/api', auth);
+
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { httpOnly: true }
+}));
+
 
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {

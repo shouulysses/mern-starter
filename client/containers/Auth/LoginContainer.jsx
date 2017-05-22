@@ -1,13 +1,20 @@
-import React, { PropTypes, Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../../actions/AuthActions';
 import LoginForm from '../../components/Auth/LoginForm';
 
-class LoginContainer extends Component {
+class LoginContainer extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {};
     this.handleLogin = this.handleLogin.bind(this);
+    this.props.dispacth(Actions.initialState());
+  }
+  
+  // Redirect if login
+  componentDidUpdate(prevProps){
+    if(this.props.isAuthenticated)
+      this.context.router.push('/posts');
   }
   
   handleLogin(email, password) {
@@ -17,7 +24,10 @@ class LoginContainer extends Component {
   
   render() {
     return (
-      <LoginForm handleLogin={this.handleLogin} />
+      <LoginForm 
+        handleLogin = {this.handleLogin} 
+        message = {this.props.message}
+      />
     );
   }
 }
@@ -31,10 +41,10 @@ function mapStateToProps(store) {
 }
 
 LoginContainer.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  message: PropTypes.string,
-  dispatch: PropTypes.func.isRequired,
+  isFetching: React.PropTypes.bool.isRequired,
+  isAuthenticated: React.PropTypes.bool.isRequired,
+  message: React.PropTypes.string,
+  dispatch: React.PropTypes.func.isRequired,
 };
 
 LoginContainer.contextTypes = {

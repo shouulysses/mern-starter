@@ -18,13 +18,15 @@ if (process.env.NODE_ENV !== 'production') {
   require('./pages/Post/PostListPage');
   require('./pages/Post/PostDetailPage');
   require('./containers/Auth/LoginContainer');
+  require('./containers/Auth/SignupContainer');
 }
 
 // react-router setup with code-splitting
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
 export default (
   <Route path="/" component={App}>
-    <IndexRoute
+    <Route
+      path="/posts"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./pages/Post/PostListPage').default);
@@ -39,11 +41,18 @@ export default (
         });
       }}
     />
-    <Route 
-      path="/login"
+    <IndexRoute 
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./containers/Auth/LoginContainer').default);
+        });
+      }}
+    />
+    <Route 
+      path="/signup"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./containers/Auth/SignupContainer').default);
         });
       }}
     />

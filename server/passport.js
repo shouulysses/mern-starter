@@ -4,11 +4,28 @@ import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
 
 import User from './models/user';
 
-const localOptions = {
-  usernameField: 'email',
-  passwordField: 'password',
-  passReqToCallback: true
-};
+passport.use(new LocalStrategy(
+  {
+    usernameField: 'email',
+    passwordField: 'password',
+  },
+  function(email, password, done) {
+    User.findOne({email})
+    .then((user) => {
+      if (!user) {
+        done(null, false, { message: 'Invalid email' });
+      } else if (!user.validatePassword(password, user.password)) {
+        done(null, false, { message: 'Invalid password' });
+      } else {
+        done(null, user);
+      }
+    })
+    .catch((err) => {
+      done(err, false);
+    }); 
+  }
+));
+
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeader(),
@@ -26,22 +43,6 @@ const jwtSessionOptions = {
   secretOrKey: 'secret'
 };
 
-const localCallback = (req, email, pass, done) => {
-  User.findOne({ email })
-  .then((user) => {
-    if (!user) {
-      done(null, false);
-    } else if (!user.validatePassword(pass)) {
-      done(null, false);
-    } else {
-      done(null, user);
-    }
-  })
-  .catch((err) => {
-    done(err, false);
-  });
-};
-
 const jwtCallback = (payload, done) => {
   const cuid = payload.sub;
   User.findOne({ cuid })
@@ -57,10 +58,6 @@ const jwtCallback = (payload, done) => {
   });
 };
 
-const localStrategy = new LocalStrategy(
-  localOptions, localCallback
-);
-
 const jwtStrategy = new JwtStrategy(
   jwtOptions, jwtCallback
 );
@@ -69,7 +66,6 @@ const jwtSessionStrategy = new JwtStrategy(
   jwtSessionOptions, jwtCallback
 );
 
-passport.use('local', localStrategy);
 passport.use('jwt', jwtStrategy);
 passport.use('jwt-session', jwtSessionStrategy);
 

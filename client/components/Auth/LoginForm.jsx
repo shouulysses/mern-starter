@@ -3,18 +3,17 @@ import { Form } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
 //Import Images
-import logo from '../../public/static/logo.png'
+import logo from '../../public/static/logo.png';
 
-export default class Homepage extends React.Component {
+export default class LoginForm extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.handleLogin = this.handleLogin.bind(this);
   }
   
-  handleLogin() {
-    const {email, password} = this.refs;
-    this.props.handleLogin(email.value, password.value);
-    email.value = password.value = '';
+  handleLogin = (e) => {
+    e.preventDefault();
+    this.props.handleLogin(this.email.value, this.password.value);
   }
   
   render(){
@@ -35,13 +34,14 @@ export default class Homepage extends React.Component {
               <div className="btn-group">
                 <button className="btn-green" type="submit">Sign In</button>
               </div>
+              { this.props.message }
             </Form>
             <div className="mt2">
               <Link to="/signup">I want to Sign up</Link>
             </div>
           </div>
           <div className="col-12 col-md-6 right bg-sea-blue">
-            <img src={logo} />
+            <img src={ logo } />
           </div>
         </div>
       </div>

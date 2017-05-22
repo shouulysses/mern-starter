@@ -13,6 +13,6 @@ router.route('/posts/:cuid').get(PostController.getPost);
 router.route('/addPost').post(passport.authenticate('jwt', {session:false}), PostController.addPost);
 
 // Delete a Post
-router.route('/deletePost').post(passport.authenticate('jwt', {session:false}), PostController.deletePost);
+router.route('/deletePost/:cuid').post(passport.authenticate('jwt', {session:false}), PostController.deletePost);
 
 export default router;
