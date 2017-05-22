@@ -17,7 +17,12 @@ class PostListPage extends Component {
   componentDidMount() {
     this.props.dispatch(fetchPosts());
   }
-
+  
+  componentDidUpdate(prevProps){
+    if(!this.props.isAuthenticated)
+      this.context.router.push('/');
+  }
+  
   handleDeletePost = post => {
     if (confirm('Do you want to delete this post')) { // eslint-disable-line
       this.props.dispatch(deletePostRequest(post));
@@ -43,10 +48,11 @@ class PostListPage extends Component {
 PostListPage.need = [() => { return fetchPosts(); }];
 
 // Retrieve data from store as props
-function mapStateToProps(state) {
+function mapStateToProps(store) {
   return {
-    showAddPost: getShowAddPost(state),
-    posts: getPosts(state),
+    showAddPost: getShowAddPost(store),
+    posts: getPosts(store),
+    isAuthenticated: store.auth.isAuthenticated
   };
 }
 
@@ -58,6 +64,7 @@ PostListPage.propTypes = {
   })).isRequired,
   showAddPost: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 PostListPage.contextTypes = {

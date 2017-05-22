@@ -26,33 +26,6 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-/*
-router.post('/login', function(req, res, next) {
-  passport.authenticate('local', { session: false }, (err, user) => {
-    if (err){
-      console.log('err', err);
-      return next(err);
-    }
-    console.log('hey', user)
-    if (!user) {
-      return res.status(401).json({
-        user: { ok: false },
-        message: 'Faliure to login',
-      });
-    }
-    const payload = { email: user.email };
-    const options = { subject: user.cuid };
-    const token = jwt.sign(payload, 'secret', options);
-    console.log('here');
-    req.session.token = token;
-    
-    return res.json({
-      message: 'login ok',
-      user: { ok: true, token }
-    });
-  })(req, res, next)
-})
-*/
 router.route('/signup').post(UserController.signup); 
   
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {

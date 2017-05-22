@@ -4,12 +4,8 @@ import { connect } from 'react-redux';
 // Import Components
 import Helmet from 'react-helmet';
 import DevTools from '../../containers/DevTools';
-import Header from './Header';
-import Footer from './Footer';
-
-// Import Actions
-import { toggleAddPost } from '../../actions/AppActions';
-import { switchLanguage } from '../../actions/IntlActions';
+import Sidebar from '../Sidebar';
+import Topbar from '../Topbar';
 
 export class App extends Component {
   constructor(props) {
@@ -21,17 +17,15 @@ export class App extends Component {
     this.setState({isMounted: true}); // eslint-disable-line
   }
 
-  toggleAddPostSection = () => {
-    this.props.dispatch(toggleAddPost());
-  };
-
   render() {
+    console.log('user', this.props.currentUser);
+
     return (
       <div>
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
         <div>
           <Helmet
-            title="MERN Starter - Blog App"
+            title="Lynk Project Manager"
             titleTemplate="%s - Blog App"
             link={[{ 
               rel: "stylesheet",
@@ -49,15 +43,15 @@ export class App extends Component {
               },
             ]}
           />
-          <Header
-            switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
-            intl={this.props.intl}
-            toggleAddPost={this.toggleAddPostSection}
-          />
-          <div className='container'>
+          <div className= {`container ${this.props.isAuthenticated && 'container-auth'}`}>
+          {this.props.isAuthenticated &&
+            <Sidebar route={this.props.location.pathname} />
+          }
+          {this.props.isAuthenticated &&
+            <Topbar currentUser={this.props.currentUser} />
+          }
             {this.props.children}
           </div>
-          <Footer />
         </div>
       </div>
     );
@@ -68,12 +62,15 @@ App.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 // Retrieve data from store as props
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    isAuthenticated: store.auth.isAuthenticated,
+    currentUser: _.get(store, 'auth.user.email', '')
   };
 }
 

@@ -6,6 +6,7 @@ const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || (`http:/
 
 export function initialState(){
   return {
+    type: ActionTypes.INITIAL,
     isAuthenticated: false,
     isFetching: false,
     loaded: false,
@@ -22,12 +23,13 @@ export function requestLogin(creds) {
   };
 }
 
-export function loginSuccess(user) {
+export function loginSuccess(user, email) {
   return {
     type: ActionTypes.LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
     token: user.token,
+    email: email
   };
 }
 
@@ -62,6 +64,15 @@ export function tokenInvalid() {
     isFetching: false,
     isAuthenticated: false
   };
+}
+
+export function currentUser(){
+  return {
+    type: ActionTypes.SUCCESSFUL_LOGIN,
+    isFetching: false,
+    isAuthenticated: true,
+    
+  }
 }
 
 export function checkToken(sToken) {
@@ -113,7 +124,7 @@ export function loginUser(creds) {
         return Promise.reject(message);
       }
       localStorage.setItem('token', user.token);
-      dispatch(loginSuccess(user));
+      dispatch(loginSuccess(user, creds.email));
       
       return null;
     })
@@ -140,7 +151,7 @@ export function signup(creds) {
         return Promise.reject(message);
       }
       localStorage.setItem('token', user.token);
-      dispatch(loginSuccess(user));
+      dispatch(loginSuccess(user, creds.email));
       console.log('!!!',user);
       return null;
     })

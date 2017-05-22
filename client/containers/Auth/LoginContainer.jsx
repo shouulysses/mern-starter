@@ -8,7 +8,7 @@ class LoginContainer extends React.Component {
     super(props, context);
     this.state = {};
     this.handleLogin = this.handleLogin.bind(this);
-    this.props.dispacth(Actions.initialState());
+    //this.props.dispatch(Actions.initialState());
   }
   
   // Redirect if login

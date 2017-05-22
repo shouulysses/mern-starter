@@ -1,0 +1,14 @@
+.topbar-container{
+  position: fixed;
+  top: 0;
+  left: 250px;
+  width: 100%;
+  background: white;
+  height: $topbar-height;
+  border-bottom: 1px solid black;
+  .topbar-name{
+    text-align: right;
+    color: black;
+    margin-right: 300px;
+  }  
+}

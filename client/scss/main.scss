@@ -9,6 +9,8 @@
 @import "./utilities/spacing";
 @import "./utilities/mixins";
 
+$sidebar-width: 250px;
+$topbar-height: 60px;
 
 // Import from components
 
@@ -17,10 +19,15 @@
 @import './components/Auth/LoginForm';
 @import './components/Post/PostCreateWidget';
 @import './components/Post/PostListItem';
+@import './components/Sidebar';
+@import './components/Topbar';
 
 /*
   Global CSS file
 */
+
+
+
 ::-webkit-input-placeholder {
 	color:#aaa;
 	font-weight: 300;
@@ -46,6 +53,12 @@ body {
 
 .container {
   width: 100%;
-  padding: 0;
   margin: 0 auto;
+  height: 100%;
+  padding: 0;
+}
+
+.container-auth{
+	padding-left: $sidebar-width;
+	padding-top: $topbar-height;
 }
