@@ -1,20 +1,26 @@
+// From bootstrap
+
+@import "./bootstrap/bootstrap-grid";
+
+// Utilities
+
+@import "./utilities/colors";
+@import "./utilities/headings";
+@import "./utilities/spacing";
+@import "./utilities/mixins";
+
+
+// Import from components
+
 @import './components/App/Header';
 @import './components/App/Footer';
-
+@import './components/Auth/LoginForm';
 @import './components/Post/PostCreateWidget';
 @import './components/Post/PostListItem';
+
 /*
   Global CSS file
 */
-*{
-	margin: 0;
-	padding: 0;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	line-height: normal;
-}
-
 ::-webkit-input-placeholder {
 	color:#aaa;
 	font-weight: 300;
@@ -39,8 +45,7 @@ body {
 }
 
 .container {
-  max-width: 980px;
   width: 100%;
-  padding: 15px;
+  padding: 0;
   margin: 0 auto;
 }

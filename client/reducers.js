@@ -7,12 +7,12 @@ import { combineReducers } from 'redux';
 import app from './reducers/AppReducer';
 import posts from './reducers/PostReducer';
 import intl from './reducers/IntlReducer';
-import user from './reducers/UserReducer';
+import auth from './reducers/AuthReducer';
 
 // Combine all reducers into one root reducer
 export default combineReducers({
   app,
   posts,
   intl,
-  user
+  auth
 });

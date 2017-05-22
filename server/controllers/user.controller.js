@@ -1,4 +1,3 @@
-import User from '../models/user';
 import bcrypt from 'bcrypt-nodejs';
 
 // generating a hash

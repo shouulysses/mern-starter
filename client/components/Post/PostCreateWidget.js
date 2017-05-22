@@ -15,13 +15,15 @@ export class PostCreateWidget extends Component {
   render() {
     const cls = `form ${(this.props.showAddPost ? 'appear' : '')}`;
     return (
-      <div className={cls}>
-        <div className='form-content'>
-          <h2 className='form-title'><FormattedMessage id="createNewPost" /></h2>
-          <input placeholder={this.props.intl.messages.authorName} className='form-field' ref="name" />
-          <input placeholder={this.props.intl.messages.postTitle} className='form-field' ref="title" />
-          <textarea placeholder={this.props.intl.messages.postContent} className='form-field' ref="content" />
-          <a className='post-submit-button' href="#" onClick={this.addPost}><FormattedMessage id="submit" /></a>
+      <div className='post-create-widget'>
+        <div className={cls}>
+          <div className='form-content'>
+            <h2 className='form-title'><FormattedMessage id="createNewPost" /></h2>
+            <input placeholder={this.props.intl.messages.authorName} className='form-field' ref="name" />
+            <input placeholder={this.props.intl.messages.postTitle} className='form-field' ref="title" />
+            <textarea placeholder={this.props.intl.messages.postContent} className='form-field' ref="content" />
+            <a className='post-submit-button' href="#" onClick={this.addPost}><FormattedMessage id="submit" /></a>
+          </div>
         </div>
       </div>
     );

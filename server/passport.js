@@ -27,7 +27,7 @@ const jwtSessionOptions = {
 };
 
 const localCallback = (req, email, pass, done) => {
-  User.findOne({email})
+  User.findOne({ email })
   .then((user) => {
     if (!user) {
       done(null, false);
@@ -39,12 +39,12 @@ const localCallback = (req, email, pass, done) => {
   })
   .catch((err) => {
     done(err, false);
-  }); 
+  });
 };
 
 const jwtCallback = (payload, done) => {
   const cuid = payload.sub;
-  User.findOne({cuid})
+  User.findOne({ cuid })
   .then((user) => {
     if (!user) {
       done(null, false);

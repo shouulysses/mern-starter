@@ -14,13 +14,14 @@ module.exports = {
     vendor: [
       'react',
       'react-dom',
+      'semantic-ui-react'
     ],
   },
 
   output: {
     path: __dirname,
     filename: 'app.js',
-    publicPath: 'http://0.0.0.0:8080/',
+    publicPath: 'https://project-manager-mern-shouulysses.c9users.io/',
   },
 
   resolve: {
@@ -45,8 +46,11 @@ module.exports = {
         exclude: [/node_modules/, /.+\.config.js/],
         loader: 'babel-loader',
       }, {
-        test: /\.(jpe?g|gif|png|svg)$/i,
-        loader: 'url-loader?limit=10000',
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+          'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
       }, {
         test: /\.json$/,
         loader: 'json-loader',

@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 // Import Components
 import Helmet from 'react-helmet';
-import DevTools from '../DevTools';
-import header from './Header';
-import footer from './Footer';
+import DevTools from '../../containers/DevTools';
+import Header from './Header';
+import Footer from './Footer';
 
 // Import Actions
 import { toggleAddPost } from '../../actions/AppActions';
@@ -33,6 +33,10 @@ export class App extends Component {
           <Helmet
             title="MERN Starter - Blog App"
             titleTemplate="%s - Blog App"
+            link={[{ 
+              rel: "stylesheet",
+              href: "//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css" 
+            }]}
             meta={[
               { charset: 'utf-8' },
               {
@@ -45,7 +49,7 @@ export class App extends Component {
               },
             ]}
           />
-          <header
+          <Header
             switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
             intl={this.props.intl}
             toggleAddPost={this.toggleAddPostSection}
@@ -53,7 +57,7 @@ export class App extends Component {
           <div className='container'>
             {this.props.children}
           </div>
-          <footer />
+          <Footer />
         </div>
       </div>
     );

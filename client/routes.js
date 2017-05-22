@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './components/App/App';
@@ -18,6 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
   require('./pages/Post/PostListPage');
   require('./pages/Post/PostDetailPage');
+  require('./containers/Auth/LoginContainer');
 }
 
 // react-router setup with code-splitting
@@ -36,6 +36,14 @@ export default (
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./pages/Post/PostDetailPage').default);
+        });
+      }}
+    />
+    <Route 
+      path="/login"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./containers/Auth/LoginContainer').default);
         });
       }}
     />

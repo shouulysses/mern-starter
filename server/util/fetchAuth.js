@@ -1,4 +1,4 @@
-import * as Actions from '../../client/actions/UserActions';
+import * as Actions from '../../client/actions/AuthActions';
 
 export function fetchIsAuthenticated(dispatch, request, passport) {
   return new Promise((resolve, reject) => {

@@ -17,6 +17,7 @@ module.exports = {
     vendor: [
       'react',
       'react-dom',
+      'semantic-ui-react'
     ]
   },
 
@@ -44,9 +45,6 @@ module.exports = {
         test: /\.jsx*$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-      }, {
-        test: /\.(jpe?g|gif|png|svg)$/i,
-        loader: 'url-loader?limit=10000',
       }, {
         test: /\.json$/,
         loader: 'json-loader',

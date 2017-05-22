@@ -4,16 +4,16 @@ import { FormattedMessage } from 'react-intl';
 
 function PostListItem(props) {
   return (
-    <div className='single-post'>
-      <h3 className='post-title'>
+    <div className="single-post">
+      <h3 className="post-title">
         <Link to={`/posts/${props.post.slug}-${props.post.cuid}`} >
           {props.post.title}
         </Link>
       </h3>
-      <p className='author-name'><FormattedMessage id="by" /> {props.post.name}</p>
-      <p className='post-desc'>{props.post.content}</p>
-      <p className='post-action'><a href="#" onClick={props.onDelete}><FormattedMessage id="deletePost" /></a></p>
-      <hr className='divider' />
+      <p className="author-name"><FormattedMessage id="by" /> {props.post.name}</p>
+      <p className="post-desc">{props.post.content}</p>
+      <p className="post-action"><a href="#" onClick={props.onDelete}><FormattedMessage id="deletePost" /></a></p>
+      <hr className="divider" />
     </div>
   );
 }
