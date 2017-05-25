@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
 //Import Images
@@ -35,14 +35,8 @@ export default class SignupForm extends React.Component {
                 <label htmlFor="login-confirm-password" className="label-field"><span className="label-field-name">Confirm Password</span></label>
                 <input ref={confirmPassword => (this.confirmPassword = confirmPassword)} name="confirmPassword" type="password" required />
               </Form.Field>
-              <div className="field">
-                <div className="ui checkbox">
-                  <input type="checkbox" tabIndex="0" className="hidden"></input>
-                  <label>I agree to the Terms and Conditions</label>
-                </div>
-              </div>
               <div className="btn-group">
-                <button className="btn-green" type="submit">Sign In</button>
+                <Button type="submit">Sign In</Button>
               </div>
                { this.props.message }
             </Form>

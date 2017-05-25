@@ -14,7 +14,7 @@ class SignupContainer extends React.Component {
   // Redirect if login
   componentDidUpdate(prevProps){
     if(this.props.isAuthenticated)
-      this.context.router.push('/posts');
+      this.context.router.push('/projects');
   }
   
   handleSignup(email, password, confirmPassword) {

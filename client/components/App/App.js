@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import * as _ from 'lodash';
 
 // Import Components
 import Helmet from 'react-helmet';
@@ -18,8 +19,9 @@ export class App extends Component {
   }
 
   render() {
-    console.log('user', this.props.currentUser);
-
+    
+    console.log('u', this.props.currentUser)
+    
     return (
       <div>
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
@@ -44,12 +46,10 @@ export class App extends Component {
             ]}
           />
           <div className= {`container ${this.props.isAuthenticated && 'container-auth'}`}>
-          {this.props.isAuthenticated &&
-            <Sidebar route={this.props.location.pathname} />
-          }
-          {this.props.isAuthenticated &&
+          {this.props.isAuthenticated && [
+            <Sidebar route={this.props.location.pathname} />,
             <Topbar currentUser={this.props.currentUser} />
-          }
+          ]}
             {this.props.children}
           </div>
         </div>

@@ -15,7 +15,7 @@ const Sidebar = ({ route }) => (
         </li>
         <li className={classNames({ active: route.includes('history') })}>
           <Link to="/history">
-            <div>User</div>
+            <div>History</div>
             <div className="icon-area"><Icon name="history" /></div>
           </Link>
         </li>

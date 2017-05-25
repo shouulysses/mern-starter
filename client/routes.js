@@ -15,8 +15,7 @@ if (typeof require.ensure !== 'function') {
  */
 if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
-  require('./pages/Post/PostListPage');
-  require('./pages/Post/PostDetailPage');
+  require('./containers/Project/ProjectListContainer');
   require('./containers/Auth/LoginContainer');
   require('./containers/Auth/SignupContainer');
 }
@@ -26,21 +25,23 @@ if (process.env.NODE_ENV !== 'production') {
 export default (
   <Route path="/" component={App}>
     <Route
-      path="/posts"
+      path="/projects"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./pages/Post/PostListPage').default);
+          cb(null, require('./containers/Project/ProjectListContainer').default);
         });
       }}
     />
+    {/*
     <Route
-      path="/posts/:slug-:cuid"
+      path="/projects/:slug-:cuid"
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./pages/Post/PostDetailPage').default);
+          cb(null, require('').default);
         });
       }}
     />
+    */}
     <IndexRoute 
       getComponent={(nextState, cb) => {
         require.ensure([], require => {

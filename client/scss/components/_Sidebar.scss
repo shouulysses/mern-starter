@@ -6,6 +6,11 @@
   width: $sidebar-width;
   height: 100%;
   background: $dark-grey;
+  @include breakpoint(0, 992){
+    top: $topbar-height;
+    width: 100%;
+    height: $sidebar-tablet-height;
+  }
   .sidebar-menu {
     margin-top: 2rem;
     ul {

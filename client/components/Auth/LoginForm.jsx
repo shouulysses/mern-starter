@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import { Link } from 'react-router';
 
 //Import Images
@@ -32,7 +32,7 @@ export default class LoginForm extends React.Component {
                 <input ref={password => (this.password = password)} name="password" type="password" required />
               </Form.Field>
               <div className="btn-group">
-                <button className="btn-green" type="submit">Sign In</button>
+                <Button type="submit">Sign In</Button>
               </div>
               { this.props.message }
             </Form>

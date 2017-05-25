@@ -5,11 +5,13 @@
 // Utilities
 
 @import "./utilities/colors";
-@import "./utilities/headings";
 @import "./utilities/spacing";
 @import "./utilities/mixins";
+@import "./utilities/symbol";
+@import "./utilities/typography";
 
 $sidebar-width: 250px;
+$sidebar-tablet-height: 160px;
 $topbar-height: 60px;
 
 // Import from components
@@ -17,33 +19,18 @@ $topbar-height: 60px;
 @import './components/App/Header';
 @import './components/App/Footer';
 @import './components/Auth/LoginForm';
-@import './components/Post/PostCreateWidget';
-@import './components/Post/PostListItem';
+@import './components/Project/AddProjectComponent';
+@import './components/Project/ProjectTable';
 @import './components/Sidebar';
 @import './components/Topbar';
+
+// Import datepicker
+
+@import './datepicker';
 
 /*
   Global CSS file
 */
-
-
-
-::-webkit-input-placeholder {
-	color:#aaa;
-	font-weight: 300;
-}
-::-moz-placeholder {
-	color:#aaa;
-	font-weight: 300;
-}
-:-ms-input-placeholder {
-	color:#aaa;
-	font-weight: 300;
-}
-input:-moz-placeholder {
-	color:#aaa;
-	font-weight: 300;
-}
 
 body {
 	background: #FFF;
@@ -60,5 +47,9 @@ body {
 
 .container-auth{
 	padding-left: $sidebar-width;
+	@include breakpoint(0, 992){
+		padding-left: 0;
+		padding-top: $sidebar-tablet-height + $topbar-height;
+	}
 	padding-top: $topbar-height;
 }

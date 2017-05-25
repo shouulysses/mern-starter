@@ -1,6 +1,6 @@
 {
-  "name": "mern-starter",
-  "version": "2.0.1",
+  "name": "project-manager-prototype",
+  "version": "1.0.0",
   "description": "Boilerplate project for building Isomorphic apps using React and Redux",
   "scripts": {
     "test": "cross-env NODE_ENV=test PORT=8080 MONGO_URL=mongodb://localhost:27017/mern-test node_modules/.bin/nyc node --harmony-proxies node_modules/.bin/ava",
@@ -40,6 +40,7 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
+    "rc-datepicker": "^5.0.6",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-helmet": "^3.1.0",
@@ -152,5 +153,14 @@
       "text",
       "html"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shouulysses/project-manager-prototype.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shouulysses/project-manager-prototype/issues"
+  },
+  "homepage": "https://github.com/shouulysses/project-manager-prototype#readme"
 }
