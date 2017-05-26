@@ -1,45 +1,21 @@
-## A simple full-stack solution for a Project Manager
+Original boilerplate starter from MERN 2.0 (http://mern.io)
 
-_ETA: 28 May 2017_ ( Please come back on Monday, I am very very busy these few weeks... )
+Github (https://github.com/Hashnode/mern-starter)
 
-Boilerplate based on https://mern.io
-Further modified by me in https://github.com/shouulysses/mern-starter
-By adding support of scss, eslint, file structure rearrangement, user auth using passport
+Function added:
 
-**Working cloud ide (public)**
-https://ide.c9.io/shouulysses/project_manager_mern
-
-**Development site:**
-https://project-manager-mern-shouulysses.c9users.io/
-
-**Basic instruction**
-npm install
-mongod (in a separate terminal)
-npm run start (running on port 8080)
-
-**Project progress**
-
-**Done**
-Basic setup
 User Auth
-Database model setup
-Action, reducer of Project
-Project Listing Page
-Project Adding Feature
 
-**WIP**
-Action, reducer of Expert (testing)
-Single Project Page (UI)
-Dummy data
+Self version of eslint
 
-**Todo**
-Action, reducer of History
-History Page
-Responsiveness improvement
-Using of slug instead of id
-Rubbish cleaning
-Readme
-Eslint
+Support of scss
 
-**Nice to have**
-Testing 
+Rearrange of file structure
+
+basic login pages and logic
+
+To do:
+
+eslint cleanup
+
+rubbish cleaning
